@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+skinparam actorStyle awesome
+actor Account_Holder as acch
+actor Admin as adm
+actor Third_Party_User as tpu
+
+package Bank{
+usecase "Login" as UC1
+usecase "Check Account" as UC2
+usecase "Transfer Money" as UC3
+usecase "Create Third Party User" as UC4
+usecase "Create Accounts" as UC5
+usecase "Modify Balance" as UC6
+usecase "Receive Money" as UC7
+
+}
+acch --> UC1
+acch --> UC2
+acch --> UC3
+acch --> UC7
+adm --> UC4
+adm --> UC5
+adm --> UC6
+tpu ---> UC3
+tpu --> UC7
+
+
+@enduml

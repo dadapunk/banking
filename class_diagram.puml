@@ -1,0 +1,119 @@
+@startuml
+class com.dada.banking_project.models.ThirdParty {
+- String hashedKey
+}
+class com.dada.banking_project.models.StudentChecking {
+}
+class com.dada.banking_project.models.AccountHolder {
+- Integer id
+- String name
+- LocalDate dateOfBirth
+- String mailingAdress
+- Address address
+- User user
++ void setId(Integer)
++ Integer getId()
+}
+class com.dada.banking_project.models.CreditCard {
+- BigDecimal creditLimit
+- BigDecimal interestRate
+- BigDecimal penaltyFee
++ BigDecimal getCreditLimit()
++ void setCreditLimit(BigDecimal)
++ BigDecimal getInterestRate()
++ void setInterestRate(BigDecimal)
++ BigDecimal getPenaltyFee()
++ void setPenaltyFee(BigDecimal)
++ String toString()
+}
+class com.dada.banking_project.models.User {
+- Integer userId
+- String name
+- List<Account> accounts
++ Integer getUserId()
++ void setUserId(Integer)
++ String getName()
++ void setName(String)
++ String toString()
+}
+class com.dada.banking_project.models.Account {
+- Integer id
+- BigDecimal balance
+- String secretKey
+- LocalDate creationDate
+- String primaryOwner
+- String secondaryOwner
+- String status
+- BigDecimal penaltyFee
+- User user
++ Integer getId()
++ void setId(Integer)
++ BigDecimal getBalance()
++ void setBalance(BigDecimal)
++ LocalDate getCreationDate()
++ void setCreationDate(LocalDate)
++ String getPrimaryOwner()
++ void setPrimaryOwner(String)
++ String getSecondaryOwner()
++ void setSecondaryOwner(String)
++ String getStatus()
++ void setStatus(String)
++ String toString()
+}
+class com.dada.banking_project.models.Savings {
+- BigDecimal interestRate
+- BigDecimal minimumBalance
++ BigDecimal getInterestRate()
++ void setInterestRate(BigDecimal)
++ BigDecimal getMinimumBalance()
++ void setMinimumBalance(BigDecimal)
+}
+class com.dada.banking_project.models.Money {
+- {static} Currency USD
+- {static} RoundingMode DEFAULT_ROUNDING
+- Currency currency
+- BigDecimal amount
++ BigDecimal increaseAmount(Money)
++ BigDecimal increaseAmount(BigDecimal)
++ BigDecimal decreaseAmount(Money)
++ BigDecimal decreaseAmount(BigDecimal)
++ Currency getCurrency()
++ BigDecimal getAmount()
+- void setAmount(BigDecimal)
++ String toString()
+}
+class com.dada.banking_project.models.Address {
+- Integer addressId
+- String city
+- String state
+- String street
+- String zipCode
++ Integer getAddressId()
++ void setAddressId(Integer)
++ String getCity()
++ void setCity(String)
++ String getState()
++ void setState(String)
++ String getStreet()
++ void setStreet(String)
++ String getZipCode()
++ void setZipCode(String)
++ String toString()
+}
+class com.dada.banking_project.models.Admin {
+}
+class com.dada.banking_project.models.Checking {
+- Integer id
+- String secondaryOwner
+- BigDecimal minimumBalance
+- BigDecimal monthlyMaintenanceFee
+}
+
+
+com.dada.banking_project.models.User <|-- com.dada.banking_project.models.ThirdParty
+com.dada.banking_project.models.Account <|-- com.dada.banking_project.models.StudentChecking
+com.dada.banking_project.models.Account <|-- com.dada.banking_project.models.CreditCard
+com.dada.banking_project.models.Account <|-- com.dada.banking_project.models.Savings
+com.dada.banking_project.models.User <|-- com.dada.banking_project.models.Admin
+com.dada.banking_project.models.Account <|-- com.dada.banking_project.models.Checking
+@enduml
