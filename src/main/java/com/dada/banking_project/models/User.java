@@ -17,11 +17,6 @@ public class User {
     private Integer id;
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "account_holder_id")
-    private AccountHolder accountHolder;
-
-
     public User() {
     }
 

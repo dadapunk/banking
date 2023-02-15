@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @Getter
@@ -28,5 +29,9 @@ public class AccountHolder extends User{
     }
     public AccountHolder() {
 
+    }
+    public int getAge() {
+        LocalDate currentDate = LocalDate.now();
+        return Period.between(dateOfBirth, currentDate).getYears();
     }
 }

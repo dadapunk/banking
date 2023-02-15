@@ -44,6 +44,17 @@ public class Account {
         this.accountHolder = accountHolder;
     }
 
+    public Account(BigDecimal balance, String primaryOwner, String status, AccountHolder accountHolder) {
+        this.balance=balance;
+        this.primaryOwner=primaryOwner;
+        this.status=status;
+        this.accountHolder=accountHolder;
+
+    }
+
+    public Account(String primaryOwner, AccountHolder accountHolder) {
+    }
+
     //penalty fee
     //monthly maintenance Fee
 

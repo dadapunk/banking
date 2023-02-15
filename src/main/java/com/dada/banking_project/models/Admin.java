@@ -7,13 +7,11 @@ import lombok.Setter;
 
 @Entity
 public class Admin extends User{
-    private String name;
 
-    public Admin(String name, String name1) {
+    public Admin(String name) {
         super(name);
-        this.name = name1;
-    }
 
+    }
     public Admin() {
 
     }
