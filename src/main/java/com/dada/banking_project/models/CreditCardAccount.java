@@ -9,8 +9,6 @@ import java.math.BigDecimal;
 
 @Entity
 public class CreditCardAccount extends Account{
-    @Id
-    private Integer id;
     private BigDecimal creditLimit;
     private BigDecimal interestRate;
     private BigDecimal penaltyFee;

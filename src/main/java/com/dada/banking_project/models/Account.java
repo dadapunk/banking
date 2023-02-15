@@ -12,10 +12,11 @@ import java.util.List;
 @Inheritance(strategy= InheritanceType.JOINED)
 public class Account {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private BigDecimal balance;
     private String secretKey;
-    private LocalDate creationDate;
+    private LocalDate creationDate = LocalDate.now();
     private String primaryOwner;
     private String secondaryOwner;
     // FROZEN, ACTIVE ENUM?
@@ -25,7 +26,6 @@ public class Account {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_holder_id")
     private AccountHolder accountHolder;
-    // SET<Transaction> es una colección de objetos de la clase Transaction en Java. Al utilizar SET, garantiza que no haya elementos duplicados en la colección.
     @OneToMany(mappedBy = "sender")
     private List<Transaction> transactionsSent;
 
@@ -33,7 +33,15 @@ public class Account {
     private List<Transaction> transactionsReceived;
 
     public Account() {
-
+    }
+    public Account(BigDecimal balance, String primaryOwner, String secondaryOwner,
+                   String status, AccountHolder accountHolder) {
+        this.balance = balance;
+        this.creationDate = creationDate;
+        this.primaryOwner = primaryOwner;
+        this.secondaryOwner = secondaryOwner;
+        this.status = status;
+        this.accountHolder = accountHolder;
     }
 
     //penalty fee
@@ -85,14 +93,6 @@ public class Account {
     }
 
     public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Account(BigDecimal balance, LocalDate creationDate, String primaryOwner, String secondaryOwner, String status) {
-        this.balance = balance;
-        this.creationDate = creationDate;
-        this.primaryOwner = primaryOwner;
-        this.secondaryOwner = secondaryOwner;
         this.status = status;
     }
 

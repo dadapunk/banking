@@ -12,8 +12,6 @@ import java.math.BigDecimal;
 public class CheckingAccount extends Account{
     //private BigDecimal balance;
 
-    @Id
-    private Integer id;
     private String secondaryOwner;
 
     private BigDecimal minimumBalance;

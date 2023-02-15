@@ -6,13 +6,12 @@ import jakarta.persistence.*;
 @Embeddable
 public class Address {
 
-    private Integer addressId;
     private String city;
     private String state;
     private String street;
-    private String zipCode;
+    private Integer zipCode;
 
-    public Address(String city, String state, String street, String zipCode) {
+    public Address(String city, String state, String street, Integer zipCode) {
         this.city = city;
         this.state = state;
         this.street = street;
@@ -21,14 +20,6 @@ public class Address {
 
     public Address() {
 
-    }
-
-    public Integer getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(Integer addressId) {
-        this.addressId = addressId;
     }
 
     public String getCity() {
@@ -55,18 +46,17 @@ public class Address {
         this.street = street;
     }
 
-    public String getZipCode() {
+    public Integer getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(String zipCode) {
+    public void setZipCode(Integer zipCode) {
         this.zipCode = zipCode;
     }
 
     @Override
     public String toString() {
         return "Address{" +
-                "id=" + addressId +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", street='" + street + '\'' +

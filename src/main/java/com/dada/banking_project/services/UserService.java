@@ -25,7 +25,7 @@ public class UserService {
     public List<User> findAllUser() {
         return userRepository.findAll();
     }
-
+    // Find by Id
     public User findById(Integer id) {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
