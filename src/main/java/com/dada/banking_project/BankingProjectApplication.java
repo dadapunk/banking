@@ -66,13 +66,13 @@ public class BankingProjectApplication {
             // Create Accounts
             // Create SavingAccount associated with AccountHolder 1
 
-            SavingAccount saving_acc1 = new SavingAccount(BigDecimal.valueOf(2000),
+            SavingAccount saving_acc1 = new SavingAccount(BigDecimal.valueOf(1200),
                     "John Doe", "", "status",accountHolder1);
             savingAccountRepository.save(saving_acc1);
-            SavingAccount saving_acc2 = new SavingAccount(BigDecimal.valueOf(4000),
+            SavingAccount saving_acc2 = new SavingAccount(BigDecimal.valueOf(3500),
                     "Jane Carry", "", "status",accountHolder2);
             savingAccountRepository.save(saving_acc2);
-            SavingAccount saving_acc3 = new SavingAccount(BigDecimal.valueOf(1000),
+            SavingAccount saving_acc3 = new SavingAccount(BigDecimal.valueOf(3000),
                     "Jane Carry", "", "status",accountHolder2);
             savingAccountRepository.save(saving_acc3);
 
