@@ -11,16 +11,16 @@ import java.time.LocalDate;
 @Setter
 public class AccountHolderDTO {
         private String username;
-        private String password;
+        private String secretKey;
         private LocalDate dateOfBirth;
         private String mailingAdress;
         private AddressDTO address;
 
         // Constructor, getters, and setters
 
-        public AccountHolderDTO(String username, String password, LocalDate dateOfBirth, String mailingAdress, AddressDTO address) {
+        public AccountHolderDTO(String username, String secretKey, LocalDate dateOfBirth, String mailingAdress, AddressDTO address) {
                 this.username = username;
-                this.password = password;
+                this.secretKey = secretKey;
                 this.dateOfBirth = dateOfBirth;
                 this.mailingAdress = mailingAdress;
                 this.address = address;
