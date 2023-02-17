@@ -32,6 +32,7 @@ public class Transaction {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Account receiver;
 
+
     public Transaction() {
     }
 

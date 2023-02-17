@@ -70,4 +70,9 @@ public class Account {
         return this.balance.compareTo(amount) >= 0;
     }
 
+    public boolean checkOwnerName(String name) {
+        return this.primaryOwner.equals(name) || (secondaryOwner != null && this.secondaryOwner.equals(name));
+    }
+
+
 }

@@ -11,14 +11,17 @@ import java.time.LocalDateTime;
 public class TransactionDTO {
     private Integer senderAccountId;
     private Integer receiverAccountId;
+
+    private String primaryOrSecondaryOwnersName;
     private BigDecimal amount;
     private LocalDateTime transactionDate;
 
-    public TransactionDTO(Integer senderAccountId, Integer receiverAccountId, BigDecimal amount,
+    public TransactionDTO(Integer senderAccountId, Integer receiverAccountId, String primaryOrSecondaryOwnersName, BigDecimal amount,
                           LocalDateTime transactionDate) {
         this.senderAccountId = senderAccountId;
         this.receiverAccountId = receiverAccountId;
         this.amount = amount;
+        this.primaryOrSecondaryOwnersName = primaryOrSecondaryOwnersName;
         this.transactionDate = transactionDate.now();
     }
 }

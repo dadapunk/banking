@@ -81,7 +81,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/login/**").permitAll()
                 .requestMatchers(GET, "/api/users").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 .requestMatchers(POST, "/api/users").hasAnyAuthority("ROLE_ADMIN")
-                .requestMatchers(POST, "/api/account-holder/transaction").hasAnyAuthority("ROLE_ADMIN")
+                .requestMatchers(POST, "/api/account-holder/transaction").hasAnyAuthority("ROLE_ACCOUNT_HOLDER")
                 .requestMatchers(GET, "/api/account-holder/check-accounts/**").permitAll ()
                 .requestMatchers(GET, "/api/account-holder/all").permitAll ()
                 //("ROLE_ADMIN", "ROLE_ACCOUNT_HOLDER")

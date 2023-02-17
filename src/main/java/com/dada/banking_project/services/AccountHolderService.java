@@ -36,6 +36,9 @@ public class AccountHolderService  {
         if (!sender.checkBalance(transactionDTO.getAmount())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insufficient balance");
         }
+        if (!receiver.checkOwnerName(transactionDTO.getPrimaryOrSecondaryOwnersName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid owner name");
+        }
 
         sender.setBalance(sender.getBalance().subtract(transactionDTO.getAmount()));
         receiver.setBalance(receiver.getBalance().add(transactionDTO.getAmount()));
