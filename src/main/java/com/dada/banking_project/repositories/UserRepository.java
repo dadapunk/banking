@@ -2,6 +2,19 @@ package com.dada.banking_project.repositories;
 
 import com.dada.banking_project.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
+/**
+ * The UserRepository interface extends JpaRepository to allow for CRUD operations
+ * on User entities in the database.
+ */
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+    /**
+     * Method to find a User entity by its username field
+     *
+     * @param username The username of the User entity to search for
+     * @return The found User entity or null if not found
+     */
+    User findByUsername(String username);
 }

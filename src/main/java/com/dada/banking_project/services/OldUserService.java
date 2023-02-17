@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class OldUserService {
     @Autowired
     UserRepository userRepository;
 
@@ -26,7 +26,7 @@ public class UserService {
         return userRepository.findAll();
     }
     // Find by Id
-    public User findById(Integer id) {
+    public User findById(Long id) {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             return user.get();
@@ -35,13 +35,13 @@ public class UserService {
                 "The User you are looking for doesn't exist in the database");
     }
 
-    public void deleteUserById(Integer id) {
+    public void deleteUserById(Long id) {
         userRepository.findById(id).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "The User does not exist"));
         userRepository.deleteById(id);
     }
 
-    public User updateUser(Integer id, String name) {
+    public User updateUser(Long id, String name) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "The user does not exist"));
         if (user.getName() == null || user.getName().isEmpty())

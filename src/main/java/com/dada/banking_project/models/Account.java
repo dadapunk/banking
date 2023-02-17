@@ -2,6 +2,7 @@ package com.dada.banking_project.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 
 import java.math.BigDecimal;
@@ -10,6 +11,8 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy= InheritanceType.JOINED)
+@Getter
+@Setter
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,7 +52,6 @@ public class Account {
         this.primaryOwner=primaryOwner;
         this.status=status;
         this.accountHolder=accountHolder;
-
     }
 
     public Account(String primaryOwner, AccountHolder accountHolder) {
@@ -58,64 +60,8 @@ public class Account {
     //penalty fee
     //monthly maintenance Fee
 
-
-    public Integer getId() {
-        return id;
+    public boolean checkBalance(BigDecimal amount) {
+        return this.balance.compareTo(amount) >= 0;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
-
-    public LocalDate getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public String getPrimaryOwner() {
-        return primaryOwner;
-    }
-
-    public void setPrimaryOwner(String primaryOwner) {
-        this.primaryOwner = primaryOwner;
-    }
-
-    public String getSecondaryOwner() {
-        return secondaryOwner;
-    }
-
-    public void setSecondaryOwner(String secondaryOwner) {
-        this.secondaryOwner = secondaryOwner;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", balance=" + balance +
-                ", creationDate=" + creationDate +
-                ", primaryOwner='" + primaryOwner + '\'' +
-                ", secondaryOwner='" + secondaryOwner + '\'' +
-                ", status='" + status + '\'' +
-                '}';
-    }
 }

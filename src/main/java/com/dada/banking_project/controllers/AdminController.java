@@ -1,7 +1,6 @@
-package com.dada.banking_project.controller;
+package com.dada.banking_project.controllers;
 
 import com.dada.banking_project.models.Account;
-import com.dada.banking_project.models.AccountHolder;
 import com.dada.banking_project.models.DTO.AccountDTO;
 import com.dada.banking_project.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;

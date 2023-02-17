@@ -1,24 +1,25 @@
 package com.dada.banking_project.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Entity
+@Getter
+@Setter
 public class Transaction {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private BigDecimal amount;
 
-    private LocalDate date;
+    private LocalDateTime date;
 
     @ManyToOne
     @JoinColumn(name="sender_id")
@@ -31,7 +32,7 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(BigDecimal amount, LocalDate date, Account sender, Account receiver) {
+    public Transaction(BigDecimal amount, LocalDateTime date, Account sender, Account receiver) {
         this.amount = amount;
         this.date = date;
         this.sender = sender;
