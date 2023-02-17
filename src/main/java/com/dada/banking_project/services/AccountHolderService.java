@@ -66,4 +66,7 @@ public class AccountHolderService  {
     }
 
 
+    public List<Account> checkBalanceAccounts(Integer accountHolderId) {
+        return accountRepository.findByAccountHolder_Id(accountHolderId);
+    }
 }

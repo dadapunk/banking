@@ -29,6 +29,7 @@ public class BankingProjectApplication {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
+
     @Bean
     CommandLineRunner run(AccountHolderRepository accountHolderRepository,
                           AccountHolderService accountHolderService,
@@ -43,34 +44,39 @@ public class BankingProjectApplication {
             userService.saveRole(new Role(null, "ROLE_THIRD_PARTY"));
             userService.saveRole(new Role(null, "ROLE_ACCOUNT_HOLDER"));
 
-            userService.saveUser(new User(null, "John Doe", "john", "1234", new ArrayList<>()));
-            userService.saveUser(new User(null, "James Smith", "james", "1234", new ArrayList<>()));
-            userService.saveUser(new User(null, "Jane Carry", "jane", "1234", new ArrayList<>()));
-            userService.saveUser(new User(null, "Chris Anderson", "chris", "1234", new ArrayList<>()));
-            userService.saveUser(new User(null, "Sebastian Velasquez", "dadapunk", "1234", new ArrayList<>()));
-
-            // Create account Holder User
+            // Create an account Holder User
             AccountHolder accountHolder1 = new AccountHolder(null,"John Doe", "john",
                     "1234",new ArrayList<>(), LocalDate.of(1990,8,9),"",
                     null);
+            AccountHolder accountHolder2 = new AccountHolder(null,"Jane Carry", "jane",
+                    "1234",new ArrayList<>(), LocalDate.of(1992,4,3),"",
+                    null);
+            userService.saveUser(accountHolder1);
+            userService.saveUser(accountHolder2);
+            userService.saveUser(new User(null, "Chris Anderson", "chris", "1234", new ArrayList<>()));
+            userService.saveUser(new User(null, "Sebastian Velasquez", "dadapunk", "1234", new ArrayList<>()));
+
             // Assign Role to Users
             userService.addRoleToUser("john", "ROLE_ACCOUNT_HOLDER");
-            userService.addRoleToUser("james", "ROLE_ADMIN");
-            userService.addRoleToUser("jane", "ROLE_USER");
+            userService.addRoleToUser("jane", "ROLE_ACCOUNT_HOLDER");
             userService.addRoleToUser("chris", "ROLE_ADMIN");
             userService.addRoleToUser("chris", "ROLE_USER");
             userService.addRoleToUser("dadapunk", "ROLE_ADMIN");
 
             // Create Accounts
             // Create SavingAccount associated with AccountHolder 1
-            /*SavingAccount saving_acc1 = new SavingAccount(BigDecimal.valueOf(2000),
-                    "John Doe", "", "status", accountHolder1);
-            savingAccountRepository.save(saving_acc1);*/
 
-            /*// Create CheckingAccount associated with AccountHolder 2
-            CheckingAccount checking_acc2 = new CheckingAccount(BigDecimal.valueOf(1500),
-                    "John Smith", "Jane Smith", "status", accHold_2);
-            checkingAccountRepository.save(checking_acc2);*/
+            SavingAccount saving_acc1 = new SavingAccount(BigDecimal.valueOf(2000),
+                    "John Doe", "", "status",accountHolder1);
+            savingAccountRepository.save(saving_acc1);
+            SavingAccount saving_acc2 = new SavingAccount(BigDecimal.valueOf(4000),
+                    "Jane Carry", "", "status",accountHolder2);
+            savingAccountRepository.save(saving_acc2);
+            SavingAccount saving_acc3 = new SavingAccount(BigDecimal.valueOf(1000),
+                    "Jane Carry", "", "status",accountHolder2);
+            savingAccountRepository.save(saving_acc3);
+
+
         };
     }
 

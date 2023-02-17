@@ -1,5 +1,6 @@
 package com.dada.banking_project.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,10 +24,12 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name="sender_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Account sender;
 
     @ManyToOne
     @JoinColumn(name="receiver_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Account receiver;
 
     public Transaction() {

@@ -1,5 +1,7 @@
 package com.dada.banking_project.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +15,7 @@ import java.util.List;
 @Inheritance(strategy= InheritanceType.JOINED)
 @Getter
 @Setter
+
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,13 +29,16 @@ public class Account {
     private String status;
     private BigDecimal penaltyFee;
 //To accountholder
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "account_holder_id")
+
     private AccountHolder accountHolder;
     @OneToMany(mappedBy = "sender")
+    @JsonIgnore
     private List<Transaction> transactionsSent;
 
     @OneToMany(mappedBy = "receiver")
+    @JsonIgnore
     private List<Transaction> transactionsReceived;
 
     public Account() {
