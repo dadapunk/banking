@@ -6,6 +6,7 @@ import com.dada.banking_project.models.DTO.AccountHolderDTO;
 import com.dada.banking_project.models.Enum.AccountType;
 import com.dada.banking_project.repositories.*;
 import com.dada.banking_project.services.AccountHolderService;
+import com.dada.banking_project.services.AdminService;
 import com.dada.banking_project.services.impl.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -31,15 +32,12 @@ public class BankingProjectApplication {
 
 
     @Bean
-    CommandLineRunner run(AccountHolderRepository accountHolderRepository,
-                          AccountHolderService accountHolderService,
-                          SavingAccountRepository savingAccountRepository,
+    CommandLineRunner run(SavingAccountRepository savingAccountRepository,
                           CreditCardAccountRepository creditCardAccountRepository,
                           CheckingAccountRepository checkingAccountRepository,
                           StudentCheckingAccountRepository studentCheckingAccountRepository,
-                          AccountRepository accountRepository,
-                          UserRepository userRepository,
-                          UserService userService) {
+                          UserService userService,
+                          AdminService adminService) {
         return args -> {
             userService.saveRole(new Role(null, "ROLE_USER"));
             userService.saveRole(new Role(null, "ROLE_ADMIN"));
@@ -51,12 +49,14 @@ public class BankingProjectApplication {
                     "1234",new ArrayList<>(), LocalDate.of(1990,8,9),"",
                     null);
             AccountHolder accountHolder2 = new AccountHolder(null,"Jane Carry", "jane",
-                    "1234",new ArrayList<>(), LocalDate.of(1992,4,3),"",
+                    "1234",new ArrayList<>(), LocalDate.of(2000,4,3),"",
                     null);
             userService.saveUser(accountHolder1);
             userService.saveUser(accountHolder2);
-            userService.saveUser(new User(null, "Chris Anderson", "chris", "1234", new ArrayList<>()));
-            userService.saveUser(new User(null, "Sebastian Velasquez", "dadapunk", "1234", new ArrayList<>()));
+            userService.saveUser(new User(null, "Chris Anderson", "chris",
+                    "1234", new ArrayList<>()));
+            userService.saveUser(new User(null, "Sebastian Velasquez", "dadapunk",
+                    "1234", new ArrayList<>()));
 
             // Assign Role to Users
             userService.addRoleToUser("john", "ROLE_ACCOUNT_HOLDER");
@@ -76,13 +76,15 @@ public class BankingProjectApplication {
             savingAccountRepository.save(savingAccount1);
 
             // Create SavingAccount associated with AccountHolder 2
-            SavingAccount savingAccount2 = new SavingAccount(BigDecimal.valueOf(3500), "Jane Carry", "", "ACTIVE", accountHolder2);
+            SavingAccount savingAccount2 = new SavingAccount(BigDecimal.valueOf(3500),
+                    "Jane Carry", "", "ACTIVE", accountHolder2);
             savingAccount2.setMinimumBalance(BigDecimal.valueOf(1000)); // set the minimum balance
             savingAccount2.setInterestRate(BigDecimal.valueOf(0.05)); // set the interest rate
             savingAccountRepository.save(savingAccount2);
 
             // Create another SavingAccount associated with AccountHolder 2
-            SavingAccount savingAccount3 = new SavingAccount(BigDecimal.valueOf(3000), "Jane Carry", "", "ACTIVE", accountHolder2);
+            SavingAccount savingAccount3 = new SavingAccount(BigDecimal.valueOf(3000),
+                    "Jane Carry", "", "ACTIVE", accountHolder2);
             savingAccount3.setMinimumBalance(BigDecimal.valueOf(1000)); // set the minimum balance
             savingAccount3.setInterestRate(BigDecimal.valueOf(0.05)); // set the interest rate
             savingAccountRepository.save(savingAccount3);
@@ -90,19 +92,28 @@ public class BankingProjectApplication {
             // CREDIT CARD
 
             // Create CreditCardAccount associated with AccountHolder 1
-            CreditCardAccount creditCardAccount1 = new CreditCardAccount(BigDecimal.valueOf(500), "John Doe", "", "ACTIVE", accountHolder1);
+            CreditCardAccount creditCardAccount1 = new CreditCardAccount(BigDecimal.valueOf(500),
+                    "John Doe", "", "ACTIVE", accountHolder1);
             creditCardAccount1.setCreditLimit(BigDecimal.valueOf(10000)); // set the credit limit
             creditCardAccount1.setInterestRate(BigDecimal.valueOf(0.15)); // set the interest rate
             creditCardAccountRepository.save(creditCardAccount1);
 
             // Create CreditCardAccount associated with AccountHolder 2
-            CreditCardAccount creditCardAccount2 = new CreditCardAccount(BigDecimal.valueOf(2000), "Jane Carry", "", "ACTIVE", accountHolder2);
+            CreditCardAccount creditCardAccount2 = new CreditCardAccount(BigDecimal.valueOf(2000),
+                    "Jane Carry", "", "ACTIVE", accountHolder2);
             creditCardAccount2.setCreditLimit(BigDecimal.valueOf(100)); // set the credit limit
             creditCardAccount2.setInterestRate(BigDecimal.valueOf(0.2)); // set the interest rate
             creditCardAccountRepository.save(creditCardAccount2);
 
+            // CHECKING ACCOUNT FROM ACC HOLDER LESS THAN 24 YEARS OLD
+            CheckingAccount checkingAccount = new CheckingAccount(BigDecimal.valueOf(700),"Jane Carry",
+                    "","ACTIVE",accountHolder2);
+            adminService.addAccount(new AccountDTO(BigDecimal.valueOf(900),
+                    "Jane Carry", "Ben Carry", "CHECKING",
+                    "ACTIVE", accountHolder2.getId().intValue()));
+            //checkingAccountRepository.save(checkingAccount);
+
             // STUDENT ACCOUNT
-            // Create an AccountHolder for the student
 
             // Create a checking account for the student
             StudentCheckingAccount studentCheckingAccount = new StudentCheckingAccount(BigDecimal.valueOf(250),

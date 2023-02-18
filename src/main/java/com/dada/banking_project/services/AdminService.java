@@ -24,6 +24,8 @@ public class AdminService {
     CreditCardAccountRepository creditCardAccountRepository;
     @Autowired
     AccountRepository accountRepository;
+    @Autowired
+    StudentCheckingAccountRepository studentCheckingAccountRepository;
 
     public Account addAccount(AccountDTO accountDTO) {
         //Validate AccountHolder
@@ -37,8 +39,15 @@ public class AdminService {
                 savingAccountRepository.save(savingAccount);
                 break;
             case "CHECKING":
-                CheckingAccount checkingAccount = new CheckingAccount();
+                if (accountholder.getAge() < 24) {
+                    StudentCheckingAccount studentCheckingAccount = new StudentCheckingAccount(accountDTO.getBalance(), accountDTO.getPrimaryOwner(),
+                            accountDTO.getSecondaryOwner(), accountDTO.getStatus(), accountholder);
+                studentCheckingAccountRepository.save(studentCheckingAccount);
+                } else {
+                    CheckingAccount checkingAccount = new CheckingAccount(accountDTO.getBalance(), accountDTO.getPrimaryOwner(),
+                            accountDTO.getSecondaryOwner(), accountDTO.getStatus(), accountholder);
                 checkingAccountRepository.save(checkingAccount);
+                }
                 break;
             case "CREDIT_CARD":
                 CreditCardAccount creditCardAccount = new CreditCardAccount();
@@ -70,6 +79,5 @@ public class AdminService {
 
         return account;
     }
-
 
 }

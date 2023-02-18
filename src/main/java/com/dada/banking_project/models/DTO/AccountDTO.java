@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class AccountDTO {
-    private Integer id;
+
     private BigDecimal balance;
     private String secretKey;
     private String primaryOwner;
@@ -28,23 +28,20 @@ public class AccountDTO {
     public AccountDTO() {
     }
 
-    public AccountDTO(BigDecimal balance, String secretKey,
-                      String primaryOwner, String secondaryOwner, String accountType,
-                      String status, BigDecimal penaltyFee, Integer accountHolderId) {
+    public AccountDTO(BigDecimal balance, String primaryOwner, String secondaryOwner, String accountType,
+                      String status, Integer accountHolderId) {
                         this.balance = balance;
-                        this.secretKey = secretKey;
                         this.primaryOwner = primaryOwner;
                         this.secondaryOwner = secondaryOwner;
                         this.accountType = accountType;
                         this.status = status;
-                        this.penaltyFee = penaltyFee;
                         this.accounHolderId = accountHolderId;
     }
 
     @Override
     public String toString() {
         return "AccountDTO{" +
-                "id=" + id +
+
                 ", balance=" + balance +
                 ", secretKey='" + secretKey + '\'' +
                 ", primaryOwner='" + primaryOwner + '\'' +
