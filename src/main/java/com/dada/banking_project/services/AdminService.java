@@ -2,7 +2,6 @@ package com.dada.banking_project.services;
 
 import com.dada.banking_project.models.*;
 import com.dada.banking_project.models.DTO.AccountDTO;
-import com.dada.banking_project.models.Enum.AccountType;
 import com.dada.banking_project.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,8 +29,6 @@ public class AdminService {
         //Validate AccountHolder
         AccountHolder accountholder = accountHolderRepository.findById(accountDTO.getAccounHolderId()).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.BAD_REQUEST, "Account Holder does not exist"));
-
-
         //Filter by Account type
         switch (accountDTO.getAccountType()) {
             case "SAVING":

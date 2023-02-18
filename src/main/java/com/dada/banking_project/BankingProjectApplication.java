@@ -69,7 +69,8 @@ public class BankingProjectApplication {
             // SAVING ACCOUNT
 
             // Create SavingAccount associated with AccountHolder 1
-            SavingAccount savingAccount1 = new SavingAccount(BigDecimal.valueOf(1200), "John Doe", "", "status", accountHolder1);
+            SavingAccount savingAccount1 = new SavingAccount(BigDecimal.valueOf(1200), "John Doe",
+                    "", "status", accountHolder1);
             savingAccount1.setMinimumBalance(BigDecimal.valueOf(1200)); // set the minimum balance
             savingAccount1.setInterestRate(BigDecimal.valueOf(0.02)); // set the interest rate
             savingAccountRepository.save(savingAccount1);

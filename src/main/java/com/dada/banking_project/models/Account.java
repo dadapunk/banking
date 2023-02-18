@@ -8,20 +8,25 @@ import lombok.Setter;
 
 
 import java.math.BigDecimal;
+import java.security.SecureRandom;
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.List;
 
 @Entity
 @Inheritance(strategy= InheritanceType.JOINED)
 @Getter
 @Setter
-
 public class Account {
+    private static final int KEY_LENGTH_BYTES = 32; // longitud de la clave en bytes
+    private static final SecureRandom random = new SecureRandom();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private BigDecimal balance;
     private String secretKey;
+
     private LocalDate creationDate = LocalDate.now();
     private String primaryOwner;
     private String secondaryOwner;
@@ -51,6 +56,7 @@ public class Account {
         this.secondaryOwner = secondaryOwner;
         this.status = status;
         this.accountHolder = accountHolder;
+        setSecretKey();
     }
 
     public Account(BigDecimal balance, String primaryOwner, String status, AccountHolder accountHolder) {
@@ -58,9 +64,16 @@ public class Account {
         this.primaryOwner=primaryOwner;
         this.status=status;
         this.accountHolder=accountHolder;
+        setSecretKey();
     }
 
     public Account(String primaryOwner, AccountHolder accountHolder) {
+    }
+    public void setSecretKey() {
+        byte[] keyBytes = new byte[KEY_LENGTH_BYTES];
+        random.nextBytes(keyBytes);
+        String key = Base64.getEncoder().encodeToString(keyBytes);
+        this.secretKey = key;
     }
 
     //penalty fee
