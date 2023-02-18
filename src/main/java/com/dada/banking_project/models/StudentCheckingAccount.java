@@ -14,8 +14,8 @@ public class StudentCheckingAccount extends CheckingAccount {
 
     public StudentCheckingAccount(BigDecimal balance, String primaryOwner, String secondaryOwner, String status, AccountHolder accountHolder) {
         super(balance, primaryOwner, secondaryOwner, status, accountHolder);
-        this.setMonthlyMaintenanceFee(MONTHLY_MAINTENANCE_FEE);
-        this.setMinimumBalance(MINIMUM_BALANCE);
+        setMonthlyMaintenanceFee(MONTHLY_MAINTENANCE_FEE);
+        setMinimumBalance(MINIMUM_BALANCE);
     }
     public StudentCheckingAccount() {
     }
@@ -24,7 +24,6 @@ public class StudentCheckingAccount extends CheckingAccount {
         if (!monthlyMaintenanceFee.equals(MONTHLY_MAINTENANCE_FEE)) {
             throw new IllegalArgumentException("Monthly maintenance fee for student checking account must be zero.");
         }
-        super.setMonthlyMaintenanceFee(monthlyMaintenanceFee);
     }
 
     @Override
@@ -32,7 +31,6 @@ public class StudentCheckingAccount extends CheckingAccount {
         if (!minimumBalance.equals(MINIMUM_BALANCE)) {
             throw new IllegalArgumentException("Minimum balance for student checking account must be zero.");
         }
-        super.setMinimumBalance(minimumBalance);
     }
 }
 

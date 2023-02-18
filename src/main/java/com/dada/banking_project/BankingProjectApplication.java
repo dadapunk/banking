@@ -104,11 +104,9 @@ public class BankingProjectApplication {
             // Create an AccountHolder for the student
 
             // Create a checking account for the student
-            CheckingAccount studentCheckingAccount = new CheckingAccount(BigDecimal.valueOf(1000),
-                    "John Doe", "", "ACTIVE", accountHolder1);
-            studentCheckingAccount.setMonthlyMaintenanceFee(BigDecimal.valueOf(4));
-            studentCheckingAccount.setMinimumBalance(BigDecimal.valueOf(250));
-            //studentCheckingAccountRepository.save();
+            StudentCheckingAccount studentCheckingAccount = new StudentCheckingAccount(BigDecimal.valueOf(250),
+                    "Alan Doe", "John Doe", "ACTIVE", accountHolder1);
+            studentCheckingAccountRepository.save(studentCheckingAccount);
 
 
 
