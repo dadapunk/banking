@@ -26,11 +26,6 @@ public class CreditCardAccount extends Account {
         // Set credit limit to default value if not specified
         this.creditLimit = DEFAULT_CREDIT_LIMIT;
 
-        // Check if balance is greater than credit limit and throw exception if true
-        if (balance.compareTo(DEFAULT_CREDIT_LIMIT) > 0) {
-            throw new IllegalArgumentException("Credit limit for CreditCards is " + DEFAULT_CREDIT_LIMIT);
-        }
-
         // Set interest rate to default value if not specified
         this.interestRate = DEFAULT_INTEREST_RATE;
     }

@@ -22,11 +22,7 @@ public class SavingAccount extends Account {
     public SavingAccount(BigDecimal balance, String primaryOwner, String secondaryOwner, String status, AccountHolder accountHolder) {
         super(balance, primaryOwner, secondaryOwner, status, accountHolder);
         this.interestRate = DEFAULT_INTEREST_RATE;
-        setInterestRate(interestRate);
-        if (balance.compareTo(DEFAULT_MINIMUM_BALANCE) < 0) {
-            throw new IllegalArgumentException("Minimum balance for Savings accounts is " + DEFAULT_MINIMUM_BALANCE);
-        }
-        this.minimumBalance = balance;
+        setMinimumBalance(balance);
     }
 
     public SavingAccount() {
