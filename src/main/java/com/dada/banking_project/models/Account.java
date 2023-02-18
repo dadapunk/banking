@@ -20,6 +20,8 @@ import java.util.List;
 public class Account {
     private static final int KEY_LENGTH_BYTES = 32; // longitud de la clave en bytes
     private static final SecureRandom random = new SecureRandom();
+    private static final BigDecimal PENALTY_FEE = BigDecimal.valueOf(40);
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,12 +53,12 @@ public class Account {
     public Account(BigDecimal balance, String primaryOwner, String secondaryOwner,
                    String status, AccountHolder accountHolder) {
         this.balance = balance;
-        this.creationDate = creationDate;
         this.primaryOwner = primaryOwner;
         this.secondaryOwner = secondaryOwner;
         this.status = status;
         this.accountHolder = accountHolder;
         setSecretKey();
+        setPenaltyFee(PENALTY_FEE);
     }
 
     public Account(BigDecimal balance, String primaryOwner, String status, AccountHolder accountHolder) {
@@ -65,6 +67,7 @@ public class Account {
         this.status=status;
         this.accountHolder=accountHolder;
         setSecretKey();
+        setPenaltyFee(PENALTY_FEE);
     }
 
     public Account(String primaryOwner, AccountHolder accountHolder) {
@@ -75,9 +78,6 @@ public class Account {
         String key = Base64.getEncoder().encodeToString(keyBytes);
         this.secretKey = key;
     }
-
-    //penalty fee
-    //monthly maintenance Fee
 
     public boolean checkBalance(BigDecimal amount) {
         return this.balance.compareTo(amount) >= 0;
