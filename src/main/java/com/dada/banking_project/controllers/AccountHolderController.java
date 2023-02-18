@@ -33,8 +33,7 @@ public class AccountHolderController {
 
     @PostMapping("/transaction")
     @ResponseStatus(HttpStatus.OK)
-    public void transferFunds(@RequestBody TransactionDTO transactionDTO, Authentication authentication) {
-        System.out.println(authentication.isAuthenticated());
+    public void transferFunds(@RequestBody TransactionDTO transactionDTO) {
         accountHolderService.transaction(transactionDTO);
     }
     @GetMapping("/check-accounts/{id}")
