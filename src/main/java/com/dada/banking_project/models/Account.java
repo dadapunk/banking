@@ -13,16 +13,29 @@ import java.time.LocalDate;
 import java.util.Base64;
 import java.util.List;
 
+/**
+ * This class represents a generic account.
+ */
 @Entity
 @Inheritance(strategy= InheritanceType.JOINED)
 @Getter
 @Setter
 public class Account {
-    private static final int KEY_LENGTH_BYTES = 32; // longitud de la clave en bytes
+
+    /**
+     * The length of the secret key in bytes.
+     */
+    private static final int KEY_LENGTH_BYTES = 32;
+
+    /**
+     * A secure random number generator.
+     */
     private static final SecureRandom random = new SecureRandom();
+
+    /**
+     * The penalty fee for this account.
+     */
     private static final BigDecimal PENALTY_FEE = BigDecimal.valueOf(40);
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -32,10 +45,8 @@ public class Account {
     private LocalDate creationDate = LocalDate.now();
     private String primaryOwner;
     private String secondaryOwner;
-    // FROZEN, ACTIVE ENUM?
     private String status;
     private BigDecimal penaltyFee;
-//To accountholder
     @ManyToOne
     @JoinColumn(name = "account_holder_id")
 
@@ -79,10 +90,20 @@ public class Account {
         this.secretKey = key;
     }
 
+    /**
+     * Checks whether the account has sufficient balance to make a transaction.
+     * @param amount The amount to check against the account balance.
+     * @return true if the account has sufficient balance, false otherwise.
+     */
     public boolean checkBalance(BigDecimal amount) {
         return this.balance.compareTo(amount) >= 0;
     }
 
+    /**
+     * Checks whether the provided name matches either the primary or secondary account owner name.
+     * @param name The name to check against the account owner names.
+     * @return true if the name matches either the primary or secondary account owner name, false otherwise.
+     */
     public boolean checkOwnerName(String name) {
         return this.primaryOwner.equals(name) || (secondaryOwner != null && this.secondaryOwner.equals(name));
     }

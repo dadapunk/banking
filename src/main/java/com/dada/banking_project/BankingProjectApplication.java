@@ -2,10 +2,7 @@ package com.dada.banking_project;
 
 import com.dada.banking_project.models.*;
 import com.dada.banking_project.models.DTO.AccountDTO;
-import com.dada.banking_project.models.DTO.AccountHolderDTO;
-import com.dada.banking_project.models.Enum.AccountType;
 import com.dada.banking_project.repositories.*;
-import com.dada.banking_project.services.AccountHolderService;
 import com.dada.banking_project.services.AdminService;
 import com.dada.banking_project.services.impl.UserService;
 import org.springframework.boot.CommandLineRunner;
@@ -55,10 +52,14 @@ public class BankingProjectApplication {
             userService.saveUser(accountHolder2);
             userService.saveUser(new User(null, "Chris Anderson", "chris",
                     "1234", new ArrayList<>()));
+            // Admin User
             userService.saveUser(new User(null, "Sebastian Velasquez", "dadapunk",
                     "1234", new ArrayList<>()));
+            // Third Party User
+            ThirdParty thirdPartyUser = new ThirdParty(null, "Wendy Jove", "Wendy",
+                    "1234", new ArrayList<>());
 
-            // Assign Role to Users
+            // Assign Roles to Users
             userService.addRoleToUser("john", "ROLE_ACCOUNT_HOLDER");
             userService.addRoleToUser("jane", "ROLE_ACCOUNT_HOLDER");
             userService.addRoleToUser("chris", "ROLE_ADMIN");

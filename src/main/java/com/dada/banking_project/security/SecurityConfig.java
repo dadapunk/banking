@@ -84,7 +84,6 @@ public class SecurityConfig {
                 .requestMatchers(POST, "/api/account-holder/transaction").hasAnyAuthority("ROLE_ACCOUNT_HOLDER")
                 .requestMatchers(GET, "/api/account-holder/check-accounts/**").permitAll ()
                 .requestMatchers(GET, "/api/account-holder/all").permitAll ()
-                //("ROLE_ADMIN", "ROLE_ACCOUNT_HOLDER")
                 .anyRequest().authenticated());
         // add the custom authentication filter to the http security object
         http.addFilter(customAuthenticationFilter);

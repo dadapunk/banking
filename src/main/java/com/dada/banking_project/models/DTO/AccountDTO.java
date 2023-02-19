@@ -10,6 +10,9 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * Data transfer object representing an account to be created.
+ */
 @Getter
 @Setter
 public class AccountDTO {
@@ -30,18 +33,22 @@ public class AccountDTO {
 
     public AccountDTO(BigDecimal balance, String primaryOwner, String secondaryOwner, String accountType,
                       String status, Integer accountHolderId) {
-                        this.balance = balance;
-                        this.primaryOwner = primaryOwner;
-                        this.secondaryOwner = secondaryOwner;
-                        this.accountType = accountType;
-                        this.status = status;
-                        this.accounHolderId = accountHolderId;
+        this.balance = balance;
+        this.primaryOwner = primaryOwner;
+        this.secondaryOwner = secondaryOwner;
+        this.accountType = accountType;
+        this.status = status;
+        this.accounHolderId = accountHolderId;
     }
 
+    /**
+     * Returns a string representation of the AccountDTO object.
+     *
+     * @return a string representation of the AccountDTO object.
+     */
     @Override
     public String toString() {
         return "AccountDTO{" +
-
                 ", balance=" + balance +
                 ", secretKey='" + secretKey + '\'' +
                 ", primaryOwner='" + primaryOwner + '\'' +

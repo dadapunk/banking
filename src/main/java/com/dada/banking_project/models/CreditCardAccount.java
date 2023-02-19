@@ -10,6 +10,10 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @Setter
+/**
+ * This class represents a credit card account. It extends the Account class and adds the credit limit and interest
+ * rate as attributes.
+ */
 public class CreditCardAccount extends Account {
     // Default credit limit for CreditCards
     private static final BigDecimal DEFAULT_CREDIT_LIMIT = BigDecimal.valueOf(100);

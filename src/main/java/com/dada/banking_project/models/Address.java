@@ -3,12 +3,30 @@ package com.dada.banking_project.models;
 import jakarta.persistence.*;
 
 
+/**
+ * This class represents a postal address.
+ */
 @Embeddable
 public class Address {
 
+    /**
+     * The city of the address.
+     */
     private String city;
+
+    /**
+     * The state or province of the address.
+     */
     private String state;
+
+    /**
+     * The street of the address.
+     */
     private String street;
+
+    /**
+     * The ZIP or postal code of the address.
+     */
     private Integer zipCode;
 
     public Address(String city, String state, String street, Integer zipCode) {

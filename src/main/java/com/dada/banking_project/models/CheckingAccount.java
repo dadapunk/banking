@@ -8,17 +8,32 @@ import lombok.Setter;
 import java.math.BigDecimal;
 
 
+/**
+ * This class represents a checking account, a type of bank account that typically allows for frequent deposits and withdrawals.
+ */
 @Getter
 @Setter
 @Entity
 public class CheckingAccount extends Account{
+
+    /**
+     * The default minimum balance for a checking account.
+     */
     private static final BigDecimal DEFAULT_MINIMUM_BALANCE = BigDecimal.valueOf(250);
+
+    /**
+     * The default monthly maintenance fee for a checking account.
+     */
     private static final BigDecimal DEFAULT_MONTHLY_MAINTENANCE_FEE = BigDecimal.valueOf(12);
 
     private String secondaryOwner;
     private BigDecimal minimumBalance;
     private BigDecimal monthlyMaintenanceFee;
 
+    /**
+     * This class represents a checking account, a type of bank account that typically allows for frequent
+     * deposits and withdrawals.
+     */
     public CheckingAccount(BigDecimal balance, String primaryOwner, String secondaryOwner,
                            String status, AccountHolder accountHolder) {
         super(balance, primaryOwner, status, accountHolder);
@@ -33,6 +48,15 @@ public class CheckingAccount extends Account{
         }
     }
 
+    /**
+     * This constructor creates a new CheckingAccount object with the given primary owner, secondary owner, and account holder.
+     * If the account holder is under 24 years old, the minimum balance and monthly maintenance fee will be set to zero.
+     * Otherwise, they will be set to their default values.
+     *
+     * @param secondaryOwner The secondary owner of the checking account.
+     * @param primaryOwner The primary owner of the checking account.
+     * @param accountHolder The account holder associated with the checking account.
+     */
     public CheckingAccount(String secondaryOwner, String primaryOwner, AccountHolder accountHolder) {
         super(primaryOwner, accountHolder);
         this.secondaryOwner = secondaryOwner;
@@ -44,6 +68,7 @@ public class CheckingAccount extends Account{
             this.setMonthlyMaintenanceFee(DEFAULT_MONTHLY_MAINTENANCE_FEE);
         }
     }
+
 
     public CheckingAccount() {
     }
@@ -70,6 +95,13 @@ public class CheckingAccount extends Account{
      *
      * @param monthlyMaintenanceFee The monthly maintenance fee to set, must be greater than or equal to 12.
      * @throws IllegalArgumentException if monthly maintenance fee is less than 12.
+     */
+    /**
+     * This method sets the monthly maintenance fee for the checking account. If the given monthly maintenance fee is less
+     * than the default value of 12, an IllegalArgumentException is thrown.
+     *
+     * @param monthlyMaintenanceFee The monthly maintenance fee to set.
+     * @throws IllegalArgumentException If the given monthly maintenance fee is less than the default value of 12.
      */
     public void setMonthlyMaintenanceFee(BigDecimal monthlyMaintenanceFee) {
         if (monthlyMaintenanceFee.compareTo(BigDecimal.valueOf(12)) < 0) {
