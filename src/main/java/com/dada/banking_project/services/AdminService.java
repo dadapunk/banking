@@ -80,4 +80,12 @@ public class AdminService {
         return account;
     }
 
+    /**
+     * This method deletes an account with the specified id.
+     * @param id The id of the account to be deleted.
+     */
+    public void deleteAccount(Integer id) {
+        accountRepository.deleteById(id);
+    }
+
 }

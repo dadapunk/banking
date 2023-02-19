@@ -47,7 +47,7 @@ public class AdminController {
      * @param id The id of the account.
      * @return The balance of the specified account.
      */
-    @GetMapping("/account/{id}/balance")
+    @GetMapping("/account/balance/{id}")
     @ResponseStatus(HttpStatus.OK)
     public BigDecimal getAccountBalance(@PathVariable Integer id) {
         return adminService.getAccountBalance(id);
@@ -59,10 +59,20 @@ public class AdminController {
      * @param balance The new balance value.
      * @return The updated account.
      */
-    @PutMapping("/account/{id}/update-balance")
+    @PutMapping("/account/update-balance/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Account updateAccountBalance(@PathVariable Integer id, @RequestParam BigDecimal balance) {
         return adminService.updateAccountBalance(id, balance);
     }
+    /**
+     * This method handles the deletion of an account.
+     * @param id The id of the account to be deleted.
+     */
+    @DeleteMapping("/account/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAccount(@PathVariable Integer id) {
+        adminService.deleteAccount(id);
+    }
+
 
 }

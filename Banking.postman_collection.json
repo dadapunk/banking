@@ -44,44 +44,6 @@
 			"response": []
 		},
 		{
-			"name": "Get User by Id",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8081/author/3",
-					"host": [
-						"localhost"
-					],
-					"port": "8081",
-					"path": [
-						"author",
-						"3"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get All AccountHolder",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/api/account-holder-all",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"account-holder-all"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Get All Accounts",
 			"request": {
 				"method": "GET",
@@ -221,6 +183,119 @@
 						"api",
 						"account-holder",
 						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Account (Admin)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYWRhcHVuayIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2FwaS9sb2dpbiIsImV4cCI6MTY3Njg0NTMzOH0.GoAD09IUR3LsB3Py4Qgb1FgnhJDK9iTVwCPJoElZY4g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"balance\": \"600\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/admin/account/update-balance/2?balance=100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"account",
+						"update-balance",
+						"2"
+					],
+					"query": [
+						{
+							"key": "balance",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Balance (Account Holder)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huIiwicm9sZXMiOlsiUk9MRV9BQ0NPVU5UX0hPTERFUiJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXBpL2xvZ2luIiwiZXhwIjoxNjc2ODQ0MjM2fQ.K_HPBWqn231N4trkjfskzLAieVHHFTUtaIT47eFTvbE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/admin/account/balance/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"account",
+						"balance",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Acount (Admin)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYWRhcHVuayIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2FwaS9sb2dpbiIsImV4cCI6MTY3Njg0NjUyMX0.Es3Vk97TWcRKGHv5oGMeHTzBhFHsVIksfQ-9Hr9azks",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/admin/account/delete/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"account",
+						"delete",
+						"1"
 					]
 				}
 			},
