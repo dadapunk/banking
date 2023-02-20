@@ -1,12 +1,12 @@
 package com.dada.banking_project.models;
 
+import com.dada.banking_project.models.Accounts.Account;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 

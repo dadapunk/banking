@@ -1,4 +1,4 @@
-package com.dada.banking_project.models.DTO;
+package com.dada.banking_project.dtos;
 
 import lombok.Getter;
 import lombok.Setter;

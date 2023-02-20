@@ -1,6 +1,6 @@
 package com.dada.banking_project.controllers.interfaces;
 
-import com.dada.banking_project.models.User;
+import com.dada.banking_project.models.Users.User;
 import java.util.List;
 
 /**

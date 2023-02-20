@@ -1,7 +1,7 @@
-package com.dada.banking_project.models;
+package com.dada.banking_project.models.Accounts;
 
+import com.dada.banking_project.models.Users.AccountHolder;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 

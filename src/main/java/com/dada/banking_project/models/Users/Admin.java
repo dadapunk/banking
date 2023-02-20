@@ -1,8 +1,7 @@
-package com.dada.banking_project.models;
+package com.dada.banking_project.models.Users;
 
+import com.dada.banking_project.models.Role;
 import jakarta.persistence.Entity;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Collection;
 
@@ -11,7 +10,7 @@ import java.util.Collection;
  * This class represents an administrator, a type of user with elevated privileges.
  */
 @Entity
-public class Admin extends User{
+public class Admin extends User {
 
     /**
      * Creates a new instance of the Admin class.

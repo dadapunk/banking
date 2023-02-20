@@ -1,6 +1,5 @@
-package com.dada.banking_project.models.DTO;
+package com.dada.banking_project.dtos;
 
-import com.dada.banking_project.models.Account;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Getter;
@@ -8,7 +7,6 @@ import lombok.Setter;
 
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 /**
  * Data transfer object representing an account to be created.

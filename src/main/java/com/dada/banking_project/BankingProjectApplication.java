@@ -1,9 +1,13 @@
 package com.dada.banking_project;
 
 import com.dada.banking_project.models.*;
-import com.dada.banking_project.models.DTO.AccountDTO;
+import com.dada.banking_project.dtos.AccountDTO;
+import com.dada.banking_project.models.Accounts.*;
+import com.dada.banking_project.models.Users.AccountHolder;
+import com.dada.banking_project.models.Users.ThirdParty;
+import com.dada.banking_project.models.Users.User;
 import com.dada.banking_project.repositories.*;
-import com.dada.banking_project.services.AdminService;
+import com.dada.banking_project.services.impl.AdminService;
 import com.dada.banking_project.services.impl.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

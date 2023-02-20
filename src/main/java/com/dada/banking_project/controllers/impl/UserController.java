@@ -1,6 +1,6 @@
 package com.dada.banking_project.controllers.impl;
 
-import com.dada.banking_project.models.User;
+import com.dada.banking_project.models.Users.User;
 import com.dada.banking_project.services.interfaces.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

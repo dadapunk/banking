@@ -1,5 +1,6 @@
-package com.dada.banking_project.models;
+package com.dada.banking_project.models.Users;
 
+import com.dada.banking_project.models.Role;
 import jakarta.persistence.*;
 import lombok.*;
 

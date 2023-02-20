@@ -1,5 +1,8 @@
-package com.dada.banking_project.models;
+package com.dada.banking_project.models.Users;
 
+import com.dada.banking_project.models.Accounts.Account;
+import com.dada.banking_project.models.Address;
+import com.dada.banking_project.models.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -16,7 +19,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class AccountHolder extends User{
+public class AccountHolder extends User {
 
     /**
      * The date of birth of the account holder.

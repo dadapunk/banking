@@ -1,5 +1,6 @@
-package com.dada.banking_project.models;
+package com.dada.banking_project.models.Accounts;
 
+import com.dada.banking_project.models.Users.AccountHolder;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.Getter;

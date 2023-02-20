@@ -1,7 +1,7 @@
-package com.dada.banking_project.models;
+package com.dada.banking_project.models.Accounts;
 
+import com.dada.banking_project.models.Users.AccountHolder;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Entity
-public class CheckingAccount extends Account{
+public class CheckingAccount extends Account {
 
     /**
      * The default minimum balance for a checking account.

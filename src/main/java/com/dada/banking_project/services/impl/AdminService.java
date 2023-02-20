@@ -1,7 +1,8 @@
-package com.dada.banking_project.services;
+package com.dada.banking_project.services.impl;
 
-import com.dada.banking_project.models.*;
-import com.dada.banking_project.models.DTO.AccountDTO;
+import com.dada.banking_project.dtos.AccountDTO;
+import com.dada.banking_project.models.Accounts.*;
+import com.dada.banking_project.models.Users.AccountHolder;
 import com.dada.banking_project.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

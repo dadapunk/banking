@@ -1,7 +1,8 @@
-package com.dada.banking_project.models;
+package com.dada.banking_project.models.Accounts;
 
+import com.dada.banking_project.models.Transaction;
+import com.dada.banking_project.models.Users.AccountHolder;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

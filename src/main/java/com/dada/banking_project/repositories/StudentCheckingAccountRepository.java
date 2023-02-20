@@ -1,6 +1,6 @@
 package com.dada.banking_project.repositories;
 
-import com.dada.banking_project.models.StudentCheckingAccount;
+import com.dada.banking_project.models.Accounts.StudentCheckingAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
