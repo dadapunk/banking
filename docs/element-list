@@ -1,13 +1,12 @@
 com.dada.banking_project
-com.dada.banking_project.controllers
 com.dada.banking_project.controllers.impl
 com.dada.banking_project.controllers.interfaces
 com.dada.banking_project.dtos
 com.dada.banking_project.filters
 com.dada.banking_project.models
-com.dada.banking_project.models.DTO
+com.dada.banking_project.models.Accounts
+com.dada.banking_project.models.Users
 com.dada.banking_project.repositories
 com.dada.banking_project.security
-com.dada.banking_project.services
 com.dada.banking_project.services.impl
 com.dada.banking_project.services.interfaces
