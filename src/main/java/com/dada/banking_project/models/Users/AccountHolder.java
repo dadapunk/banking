@@ -57,6 +57,10 @@ public class AccountHolder extends User {
     public AccountHolder() {
 
     }
+
+    public AccountHolder(String accountHolderTest, String accountHolderTest1, String s, LocalDate of, String s1) {
+    }
+
     public int getAge() {
         LocalDate currentDate = LocalDate.now();
         return Period.between(dateOfBirth, currentDate).getYears();

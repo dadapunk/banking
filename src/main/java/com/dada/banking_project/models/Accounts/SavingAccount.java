@@ -39,6 +39,9 @@ public class SavingAccount extends Account {
         this.interestRate = DEFAULT_INTEREST_RATE;
     }
 
+    public SavingAccount(BigDecimal bigDecimal, AccountHolder accountHolder) {
+    }
+
     /**
      * Sets the interest rate for the SavingAccount. If the interest rate is equal to the default interest rate,
      * sets the interest rate to the default interest rate. If the interest rate is greater than the maximum interest

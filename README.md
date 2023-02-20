@@ -16,7 +16,6 @@ This project is a RESTful API for a banking system built using Spring Boot.
 - Create, update, and delete account holders
 - Create, update, and delete accounts
 - Perform transactions between accounts
-- Retrieve account and transaction history
 
 ## Technologies Used
 

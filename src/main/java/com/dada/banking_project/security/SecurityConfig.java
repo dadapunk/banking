@@ -81,11 +81,12 @@ public class SecurityConfig {
                 .requestMatchers(GET, "/api/users").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 .requestMatchers(POST, "/api/users").hasAnyAuthority("ROLE_ADMIN")
                 .requestMatchers(POST, "/api/account-holder/transaction").hasAnyAuthority("ROLE_ACCOUNT_HOLDER")
-                .requestMatchers(GET, "/api/account-holder/check-accounts/**").permitAll()
-                .requestMatchers(GET, "/api/account-holder/all").permitAll()
-                .requestMatchers(PUT, "/api/admin/account/update-balance/**").permitAll()
-                .requestMatchers(GET, "/api/admin/account/balance/**").permitAll()
-                .requestMatchers(DELETE, "/api/admin/account/delete/**").permitAll()
+                .requestMatchers(GET, "/api/account-holder/check-accounts/**").hasAnyAuthority("ROLE_ACCOUNT_HOLDER","ROLE_ADMIN")
+                .requestMatchers(GET, "/api/account-holder/all").hasAnyAuthority("ROLE_ACCOUNT_HOLDER","ROLE_ADMIN")
+                .requestMatchers(PUT, "/api/admin/account/update-balance/**").hasAnyAuthority("ROLE_ADMIN")
+                .requestMatchers(GET, "/api/admin/account/balance/**").hasAnyAuthority("ROLE_ADMIN")
+                .requestMatchers(DELETE, "/api/admin/account/delete/**").hasAnyAuthority("ROLE_ADMIN")
+                .requestMatchers(POST, "/api/ThirdParty//newTransaction").hasAnyAuthority("ROLE_THIRD_PARTY")
 
                 .anyRequest().authenticated());
         // add the custom authentication filter to the http security object
