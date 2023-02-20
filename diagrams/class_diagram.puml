@@ -1,42 +1,159 @@
 @startuml
-class com.dada.banking_project.models.ThirdParty {
+class com.dada.banking_project.dtos.TransactionDTO {
+- Integer senderAccountId
+- Integer receiverAccountId
+- String primaryOrSecondaryOwnersName
+- BigDecimal amount
+- LocalDateTime transactionDate
+}
+class com.dada.banking_project.models.Users.User {
+- Long id
+- String name
+- String username
+- String password
+- Collection<Role> roles
+}
+class com.dada.banking_project.dtos.ThirdPartyTransactionDTO {
+- Long idAccountReciever
+- Long idAccountSender
+- double amount
 - String hashedKey
 }
-class com.dada.banking_project.models.StudentChecking {
+interface com.dada.banking_project.repositories.AccountRepository {
+~ List<Account> findByAccountHolder_Id(Integer)
 }
-class com.dada.banking_project.models.AccountHolder {
-- Integer id
-- String name
+class com.dada.banking_project.BankingProjectApplication {
++ {static} void main(String[])
+~ PasswordEncoder passwordEncoder()
+~ CommandLineRunner run(SavingAccountRepository,CreditCardAccountRepository,CheckingAccountRepository,StudentCheckingAccountRepository,UserService,AdminService)
+}
+class com.dada.banking_project.filters.CustomAuthenticationFilter {
+- AuthenticationManager authenticationManager
++ Authentication attemptAuthentication(HttpServletRequest,HttpServletResponse)
+# void successfulAuthentication(HttpServletRequest,HttpServletResponse,FilterChain,Authentication)
+}
+class com.dada.banking_project.dtos.CreditCardDTO {
+- Long id
+- BigDecimal balance
+- String primaryOwner
+- String secondaryOwner
+- String status
+- BigDecimal creditLimit
+- BigDecimal interestRate
++ Long getId()
++ BigDecimal getBalance()
++ String getPrimaryOwner()
++ String getSecondaryOwner()
++ String getStatus()
++ BigDecimal getCreditLimit()
++ BigDecimal getInterestRate()
+}
+class com.dada.banking_project.models.Users.ThirdParty {
+- String hashedKey
+}
+class com.dada.banking_project.services.impl.UserService {
+- UserRepository userRepository
+- RoleRepository roleRepository
+- PasswordEncoder passwordEncoder
++ UserDetails loadUserByUsername(String)
++ User saveUser(User)
++ Role saveRole(Role)
++ void addRoleToUser(String,String)
++ User getUser(String)
++ List<User> getUsers()
+}
+class com.dada.banking_project.models.Accounts.CheckingAccount {
+- {static} BigDecimal DEFAULT_MINIMUM_BALANCE
+- {static} BigDecimal DEFAULT_MONTHLY_MAINTENANCE_FEE
+- String secondaryOwner
+- BigDecimal minimumBalance
+- BigDecimal monthlyMaintenanceFee
++ void setMinimumBalance(BigDecimal)
++ void setMonthlyMaintenanceFee(BigDecimal)
+}
+class com.dada.banking_project.services.impl.AccountHolderService {
+~ AccountHolderRepository accountHolderRepository
+~ AccountRepository accountRepository
+~ TransactionRepository transactionRepository
++ Transaction transaction(TransactionDTO)
++ AccountHolder addAccountHolder(AccountHolder)
++ List<AccountHolder> findAllAccountHolder()
++ List<Account> checkBalanceAccounts(Integer)
+}
+class com.dada.banking_project.models.Users.Admin {
+}
+interface com.dada.banking_project.repositories.AccountHolderRepository {
+}
+interface com.dada.banking_project.repositories.UserRepository {
+~ User findByUsername(String)
+}
+interface com.dada.banking_project.repositories.SavingAccountRepository {
+}
+interface com.dada.banking_project.repositories.RoleRepository {
+~ Role findByName(String)
+}
+class com.dada.banking_project.models.Accounts.CreditCardAccount {
+- {static} BigDecimal DEFAULT_CREDIT_LIMIT
+- {static} BigDecimal DEFAULT_INTEREST_RATE
+- BigDecimal creditLimit
+- BigDecimal interestRate
++ void setCreditLimit(BigDecimal)
++ BigDecimal getCreditLimit()
++ void setInterestRate(BigDecimal)
++ BigDecimal getInterestRate()
+}
+class com.dada.banking_project.security.SecurityConfig {
+- UserDetailsService userDetailsService
+- AuthenticationManagerBuilder authManagerBuilder
++ PasswordEncoder encoder()
++ AuthenticationManager authenticationManager(AuthenticationConfiguration)
+# SecurityFilterChain filterChain(HttpSecurity)
+}
+class com.dada.banking_project.dtos.AccountDTO {
+- BigDecimal balance
+- String secretKey
+- String primaryOwner
+- String secondaryOwner
+- String accountType
+- String status
+- BigDecimal penaltyFee
+- Integer accounHolderId
++ String toString()
+}
+class com.dada.banking_project.controllers.impl.ThirdPartyController {
+~ TransactionService transactionService
+~ ThirdPartyService thirdPartyService
++ TransactionResponseDTO newThirdPartyTransaction(ThirdPartyTransactionDTO)
+}
+class com.dada.banking_project.filters.CustomAuthorizationFilter {
+# void doFilterInternal(HttpServletRequest,HttpServletResponse,FilterChain)
+}
+class com.dada.banking_project.models.Address {
+- String city
+- String state
+- String street
+- Integer zipCode
++ String getCity()
++ void setCity(String)
++ String getState()
++ void setState(String)
++ String getStreet()
++ void setStreet(String)
++ Integer getZipCode()
++ void setZipCode(Integer)
++ String toString()
+}
+class com.dada.banking_project.models.Users.AccountHolder {
 - LocalDate dateOfBirth
 - String mailingAdress
 - Address address
-- User user
-+ void setId(Integer)
-+ Integer getId()
-}
-class com.dada.banking_project.models.CreditCard {
-- BigDecimal creditLimit
-- BigDecimal interestRate
-- BigDecimal penaltyFee
-+ BigDecimal getCreditLimit()
-+ void setCreditLimit(BigDecimal)
-+ BigDecimal getInterestRate()
-+ void setInterestRate(BigDecimal)
-+ BigDecimal getPenaltyFee()
-+ void setPenaltyFee(BigDecimal)
-+ String toString()
-}
-class com.dada.banking_project.models.User {
-- Integer userId
-- String name
 - List<Account> accounts
-+ Integer getUserId()
-+ void setUserId(Integer)
-+ String getName()
-+ void setName(String)
-+ String toString()
++ int getAge()
 }
-class com.dada.banking_project.models.Account {
+class com.dada.banking_project.models.Accounts.Account {
+- {static} int KEY_LENGTH_BYTES
+- {static} SecureRandom random
+- {static} BigDecimal PENALTY_FEE
 - Integer id
 - BigDecimal balance
 - String secretKey
@@ -45,75 +162,166 @@ class com.dada.banking_project.models.Account {
 - String secondaryOwner
 - String status
 - BigDecimal penaltyFee
-- User user
-+ Integer getId()
-+ void setId(Integer)
-+ BigDecimal getBalance()
-+ void setBalance(BigDecimal)
-+ LocalDate getCreationDate()
-+ void setCreationDate(LocalDate)
-+ String getPrimaryOwner()
-+ void setPrimaryOwner(String)
-+ String getSecondaryOwner()
-+ void setSecondaryOwner(String)
-+ String getStatus()
-+ void setStatus(String)
-+ String toString()
+- AccountHolder accountHolder
+- List<Transaction> transactionsSent
+- List<Transaction> transactionsReceived
++ void setSecretKey()
++ boolean checkBalance(BigDecimal)
++ boolean checkOwnerName(String)
 }
-class com.dada.banking_project.models.Savings {
-- BigDecimal interestRate
-- BigDecimal minimumBalance
-+ BigDecimal getInterestRate()
-+ void setInterestRate(BigDecimal)
-+ BigDecimal getMinimumBalance()
+class com.dada.banking_project.models.Accounts.StudentCheckingAccount {
+- {static} BigDecimal MONTHLY_MAINTENANCE_FEE
+- {static} BigDecimal MINIMUM_BALANCE
++ void setMonthlyMaintenanceFee(BigDecimal)
 + void setMinimumBalance(BigDecimal)
 }
-class com.dada.banking_project.models.Money {
-- {static} Currency USD
-- {static} RoundingMode DEFAULT_ROUNDING
-- Currency currency
-- BigDecimal amount
-+ BigDecimal increaseAmount(Money)
-+ BigDecimal increaseAmount(BigDecimal)
-+ BigDecimal decreaseAmount(Money)
-+ BigDecimal decreaseAmount(BigDecimal)
-+ Currency getCurrency()
-+ BigDecimal getAmount()
-- void setAmount(BigDecimal)
-+ String toString()
+interface com.dada.banking_project.repositories.CreditCardAccountRepository {
 }
-class com.dada.banking_project.models.Address {
-- Integer addressId
+class com.dada.banking_project.models.Role {
+- Long id
+- String name
+}
+interface com.dada.banking_project.repositories.AdminRepository {
+}
+interface com.dada.banking_project.controllers.interfaces.UserControllerInterface {
+~ List<User> getUsers()
+~ User saveUser(User)
+}
+interface com.dada.banking_project.repositories.CheckingAccountRepository {
+}
+interface com.dada.banking_project.repositories.StudentCheckingAccountRepository {
+}
+class com.dada.banking_project.services.impl.TransactionService {
+~ AccountRepository accountRepository
+~ TransactionRepository transactionRepository
++ Transaction transaction(TransactionDTO)
+}
+class com.dada.banking_project.controllers.impl.AccountHolderController {
+~ AccountHolderService accountHolderService
++ AccountHolder addAccountHolder(AccountHolder)
++ List<AccountHolder> findAllAccountHolder()
++ void transferFunds(TransactionDTO)
++ List<Account> checkBalanceAccounts(Integer)
+}
+class com.dada.banking_project.dtos.AddressDTO {
 - String city
 - String state
 - String street
-- String zipCode
-+ Integer getAddressId()
-+ void setAddressId(Integer)
-+ String getCity()
-+ void setCity(String)
-+ String getState()
-+ void setState(String)
-+ String getStreet()
-+ void setStreet(String)
-+ String getZipCode()
-+ void setZipCode(String)
-+ String toString()
+- Integer zipCode
 }
-class com.dada.banking_project.models.Admin {
+interface com.dada.banking_project.services.interfaces.UserServiceInterface {
+~ User saveUser(User)
+~ Role saveRole(Role)
+~ void addRoleToUser(String,String)
+~ User getUser(String)
+~ List<User> getUsers()
 }
-class com.dada.banking_project.models.Checking {
+class com.dada.banking_project.dtos.TransactionResponseDTO {
+- String username
+- double oldAmount
+- double newAmount
+}
+class com.dada.banking_project.dtos.RoleToUserDTO {
+- String username
+- String roleName
+}
+interface com.dada.banking_project.repositories.ThirdPartyRepository {
+~ ThirdParty findByHashedKey(String)
+}
+interface com.dada.banking_project.repositories.TransactionRepository {
+}
+class com.dada.banking_project.controllers.impl.RoleController {
+- UserServiceInterface userService
++ void saveRole(Role)
++ void addRoleToUser(RoleToUserDTO)
+}
+class com.dada.banking_project.services.impl.AdminService {
+~ AccountHolderRepository accountHolderRepository
+~ SavingAccountRepository savingAccountRepository
+~ CheckingAccountRepository checkingAccountRepository
+~ CreditCardAccountRepository creditCardAccountRepository
+~ AccountRepository accountRepository
+~ StudentCheckingAccountRepository studentCheckingAccountRepository
++ Account addAccount(AccountDTO)
++ List<Account> findAllAccounts()
++ BigDecimal getAccountBalance(Integer)
++ Account updateAccountBalance(Integer,BigDecimal)
++ void deleteAccount(Integer)
+}
+class com.dada.banking_project.models.Transaction {
 - Integer id
-- String secondaryOwner
+- BigDecimal amount
+- LocalDateTime date
+- Account sender
+- Account receiver
+}
+class com.dada.banking_project.dtos.AccountHolderDTO {
+- String username
+- String secretKey
+- LocalDate dateOfBirth
+- String mailingAdress
+- AddressDTO address
+}
+class com.dada.banking_project.services.impl.ThirdPartyService {
+~ CheckingAccountRepository checkingAccountRepository
+~ ThirdPartyRepository thirdPartyRepository
+~ TransactionRepository transactionRepository
++ TransactionResponseDTO createTransaction(ThirdPartyTransactionDTO)
+}
+interface com.dada.banking_project.controllers.interfaces.RoleControllerInterface {
+~ void saveRole(Role)
+~ void addRoleToUser(RoleToUserDTO)
+}
+class com.dada.banking_project.models.Accounts.SavingAccount {
+- {static} BigDecimal DEFAULT_INTEREST_RATE
+- {static} BigDecimal DEFAULT_MINIMUM_BALANCE
+- {static} BigDecimal MAX_INTEREST_RATE
+- BigDecimal interestRate
 - BigDecimal minimumBalance
-- BigDecimal monthlyMaintenanceFee
++ void setInterestRate(BigDecimal)
++ BigDecimal getInterestRate()
++ void setMinimumBalance(BigDecimal)
++ BigDecimal getMinimumBalance()
+}
+class com.dada.banking_project.controllers.impl.UserController {
+- UserServiceInterface userService
++ List<User> getUsers()
++ void saveUser(User)
+}
+class com.dada.banking_project.controllers.impl.AdminController {
+~ AdminService adminService
++ Account addAccount(AccountDTO)
++ List<Account> findAllAccount()
++ BigDecimal getAccountBalance(Integer)
++ Account updateAccountBalance(Integer,BigDecimal)
++ void deleteAccount(Integer)
+}
+class com.dada.banking_project.BankingProjectApplicationTests {
+~ void contextLoads()
 }
 
 
-com.dada.banking_project.models.User <|-- com.dada.banking_project.models.ThirdParty
-com.dada.banking_project.models.Account <|-- com.dada.banking_project.models.StudentChecking
-com.dada.banking_project.models.Account <|-- com.dada.banking_project.models.CreditCard
-com.dada.banking_project.models.Account <|-- com.dada.banking_project.models.Savings
-com.dada.banking_project.models.User <|-- com.dada.banking_project.models.Admin
-com.dada.banking_project.models.Account <|-- com.dada.banking_project.models.Checking
+org.springframework.data.jpa.repository.JpaRepository <|-- com.dada.banking_project.repositories.AccountRepository
+org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter <|-- com.dada.banking_project.filters.CustomAuthenticationFilter
+com.dada.banking_project.models.Users.User <|-- com.dada.banking_project.models.Users.ThirdParty
+com.dada.banking_project.services.interfaces.UserServiceInterface <|.. com.dada.banking_project.services.impl.UserService
+org.springframework.security.core.userdetails.UserDetailsService <|.. com.dada.banking_project.services.impl.UserService
+com.dada.banking_project.models.Accounts.Account <|-- com.dada.banking_project.models.Accounts.CheckingAccount
+com.dada.banking_project.models.Users.User <|-- com.dada.banking_project.models.Users.Admin
+org.springframework.data.jpa.repository.JpaRepository <|-- com.dada.banking_project.repositories.AccountHolderRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- com.dada.banking_project.repositories.UserRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- com.dada.banking_project.repositories.SavingAccountRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- com.dada.banking_project.repositories.RoleRepository
+com.dada.banking_project.models.Accounts.Account <|-- com.dada.banking_project.models.Accounts.CreditCardAccount
+org.springframework.web.filter.OncePerRequestFilter <|-- com.dada.banking_project.filters.CustomAuthorizationFilter
+com.dada.banking_project.models.Users.User <|-- com.dada.banking_project.models.Users.AccountHolder
+com.dada.banking_project.models.Accounts.CheckingAccount <|-- com.dada.banking_project.models.Accounts.StudentCheckingAccount
+org.springframework.data.jpa.repository.JpaRepository <|-- com.dada.banking_project.repositories.CreditCardAccountRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- com.dada.banking_project.repositories.AdminRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- com.dada.banking_project.repositories.CheckingAccountRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- com.dada.banking_project.repositories.StudentCheckingAccountRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- com.dada.banking_project.repositories.ThirdPartyRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- com.dada.banking_project.repositories.TransactionRepository
+com.dada.banking_project.controllers.interfaces.RoleControllerInterface <|.. com.dada.banking_project.controllers.impl.RoleController
+com.dada.banking_project.models.Accounts.Account <|-- com.dada.banking_project.models.Accounts.SavingAccount
 @enduml
