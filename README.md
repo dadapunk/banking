@@ -24,6 +24,7 @@ This project is a RESTful API for a banking system built using Spring Boot.
 - Hibernate
 - MySQL
 - JUnit
+- PlantUML (for UML diagrams)
 
 ## Setup
 
