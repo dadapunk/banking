@@ -30,8 +30,8 @@ This project is a RESTful API for a banking system built using Spring Boot.
 
 1. Clone this repository
 2. Install MySQL and create a new database named `banking`
-3. Run the SQL scripts in the `src/main/resources/sql` folder to create the necessary tables
-4. Update the `application.properties` file with your MySQL username and password
+3. Create manually a database in MySQL
+4. Update the `application.properties` file with your MySQL username, password and database name
 5. Run the application using your IDE or with the command `mvn spring-boot:run`
 
 
